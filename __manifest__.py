@@ -1,0 +1,10 @@
+{
+    'name': 'Kingstrong_extended',
+    'version': '1.0',
+    'depends': ['base', 'contacts', 'sale', 'crm', 'web'],
+    'author': 'Angel Barrera',
+    'category': 'Customization',
+    'description': '''Este módulo se encarga de las configuraciones personalizadas de acuerdo a las necesidades de los registros de contactos.''',
+    'data': ['security/security_groups.xml', 'views/assets.xml', ],
+    'license': 'LGPL-3',
+}
