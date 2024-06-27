@@ -10,7 +10,7 @@ _logger = logging.getLogger(__name__) #instancia del logg
 class Saleorder(models.Model):  # clase para confirmar que pertenecen a un grupo para confirmar la orden de venta y desactivar documento de origen
 	_inherit = 'sale.order'
 
-	origin = fields.char(readonly=True)
+	origin = fields.Char(readonly=True)
 
 	
 	def action_confirm(self):

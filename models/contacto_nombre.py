@@ -22,4 +22,4 @@ class Contactoname(models.Model):
                 existing_partners = self.env['res.partner'].search([('name', '=', record.name), ('id', '!=', record.id )], limit = 1) #busca el nombre
                 if existing_partners:
                     raise ValidationError("Este usuario ya esta registrado, si crees que es un usuario nuevo porfavor contacta a tu gerente.")
-    
+

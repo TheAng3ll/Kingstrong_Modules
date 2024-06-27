@@ -1,7 +1,7 @@
 {
     'name': 'Kingstrong_extended',
     'version': '1.0',
-    'depends': ['base', 'contacts', 'sale', 'crm', 'web'],
+    'depends': ['base', 'contacts', 'sale', 'crm', 'web', 'purchase'],
     'author': 'Angel Barrera',
     'category': 'Customization',
     'description': '''Este módulo se encarga de las configuraciones personalizadas de acuerdo a las necesidades de los registros de contactos.''',

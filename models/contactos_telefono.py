@@ -9,6 +9,8 @@ _logger = logging.getLogger(__name__)  # declaración del _logger para imprimir 
 class Contactos(models.Model):
     _inherit = 'res.partner'  # llamado del modelo del cual vamos a usar sus atributos
 
+    mobile = fields.Char(readonly=True)
+
     def format_phone(self, phone_number):
         clean_number = re.sub(r'\D', '', phone_number)  # Eliminar todos los caracteres no numéricos
         if len(clean_number) == 10:  # Si es un número de 10 dígitos
@@ -57,4 +59,4 @@ class Contactos(models.Model):
                 raise ValidationError("El número de teléfono ya está registrado.")
 
             if existing_mobile:
-                raise ValidationError("El número de celular ya está registrado.")
+                #raise ValidationError("El número de celular ya está registrado.")
