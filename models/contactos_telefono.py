@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)  # declaración del _logger para imprimir 
 class Contactos(models.Model):
     _inherit = 'res.partner'  # llamado del modelo del cual vamos a usar sus atributos
 
-    mobile = fields.Char(readonly=True)
+    mobile = fields.Char(readonly=True) # Campo mobil solo lectura.
 
     def format_phone(self, phone_number):
         clean_number = re.sub(r'\D', '', phone_number)  # Eliminar todos los caracteres no numéricos
@@ -28,17 +28,8 @@ class Contactos(models.Model):
             else:
                 _logger.info("Número de teléfono sin formatear debido a longitud incorrecta: %s", self.phone)
 
-    @api.onchange('mobile')
-    def _onchange_mobile(self):
-        if self.mobile:
-            clean_number = re.sub(r'\D', '', self.mobile)
-            if len(clean_number) == 10:
-                self.mobile = self.format_phone(self.mobile)
-                _logger.info("Número de móvil formateado: %s", self.mobile)
-            else:
-                _logger.info("Número de móvil sin formatear debido a longitud incorrecta: %s", self.mobile)
 
-    @api.constrains('phone', 'mobile')  # llamado de los campos que vamos a necesitar
+    @api.constrains('phone')  # llamado de los campos que vamos a necesitar
     def _check_phone(self):  # Función para comparar los campos de teléfono y celular
         phone_pattern = re.compile(r'^\+52\s1\s\d{2}\s\d{4}\s\d{4}$')  # Formato esperado
         for record in self:  # Iterar sobre todos los registros
@@ -47,13 +38,8 @@ class Contactos(models.Model):
                 if record.phone != formatted_phone:
                     raise ValidationError("Campo teléfono inválido: solo se permiten números en el formato '+52 1 XX XXXX XXXX'.")
 
-            if record.mobile:  # Validar formato
-                formatted_mobile = self.format_phone(record.mobile)
-                if record.mobile != formatted_mobile:
-                    raise ValidationError("Campo móvil inválido: solo se permiten números en el formato '+52 1 XX XXXX XXXX'.")
-
-            existing_mobile = self.env['res.partner'].search([('mobile', '=', record.mobile), ('id', '!=', record.id)])  # Buscar duplicados
-            existing_phone = self.env['res.partner'].search([('phone', '=', record.phone), ('id', '!=', record.id)])
+            
+            existing_phone = self.env['res.partner'].search([('phone', '=', record.phone), ('id', '!=', record.id)]) # Buscamos que no exista
 
             if existing_phone:  # Verificar duplicados
                 raise ValidationError("El número de teléfono ya está registrado.")
