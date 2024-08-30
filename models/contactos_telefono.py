@@ -19,6 +19,8 @@ class Contactos(models.Model):
     def _onchange_phone(self):
         if self.phone:
             clean_number = re.sub(r'\D', '', self.phone) #Eliminar los caracteres no numericos
+            if clean_number.startswith('521'): # Este if se encarga de eliminar la Lada y dejando solo los numeros, esto es un desarrollo especial para chatroom.
+                clean_number =clean_number[3:]
             if len(clean_number) == 10: # solo acepta 10 digitos una vez limpio
                 formatted_number = self.format_phone_number(clean_number) #la variable adquiere el valor de el numero con el formato
                 self.phone = formatted_number # Imprime el numero en el campo front
