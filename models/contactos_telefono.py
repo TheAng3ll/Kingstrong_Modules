@@ -60,13 +60,4 @@ class crmLead(models.Model):
         else: #si el campo esta vacio imprime este defecto
             self.phone = '+52 1 00 0000 0000'
 
-    @api.constrains('phone')  
-    def _check_phone(self):  # Función para comparar los campos de teléfono 
-        for record in self:  # Iterar sobre todos los registros
-            if record.phone and record.phone != '+52 1 00 0000 0000':  # Validar formato y que sea diferen al de defecto
-                existing_phone = self.env['res.partner'].search([('phone', '=', record.phone), ('id', '!=', record.id)]) #al ecnontrar le da valor
-
-                if existing_phone:  # Verificar duplicados al encontrar que si tenga valor
-                    raise ValidationError("El número de teléfono ya está registrado.")
-
 
