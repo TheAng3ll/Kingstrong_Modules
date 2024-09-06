@@ -10,5 +10,9 @@
             <field name="name">Confirmar Presupuesto</field>
             <field name="category_id" ref="base.module_category_user_type"/>
         </record>
+        <record id="group_margen" model="res.groups">
+                <field name="name">Ver Margen</field>
+                <field name="category_id" ref="base.module_category_administration"/>
+        </record>
     </data>
 </odoo>
