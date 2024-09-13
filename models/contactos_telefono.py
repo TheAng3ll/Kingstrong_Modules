@@ -33,6 +33,7 @@ class Contactos(models.Model):
     @api.constrains('phone')  
     def _check_phone(self):  # Función para comparar los campos de teléfono 
         for record in self:  # Iterar sobre todos los registros
+            existing_phone = False # Declaracion de variable a comparar
             if record.phone and record.phone != '+52 1 00 0000 0000':  # Validar formato y que sea diferen al de defecto
                 existing_phone = self.env['res.partner'].search([('phone', '=', record.phone), ('id', '!=', record.id)]) #al ecnontrar le da valor
 
@@ -52,6 +53,7 @@ class crmLead(models.Model):
     def _onchange_phone(self):
         if self.phone:
             clean_number = re.sub(r'\D', '', self.phone) #Eliminar los caracteres no numericos
+            existing_phone = False # Declaracion de variable a comparar
             if len(clean_number) == 10: # solo acepta 10 digitos una vez limpio
                 formatted_number = self.format_phone_number(clean_number) #la variable adquiere el valor de el numero con el formato
                 self.phone = formatted_number # Imprime el numero en el campo front
