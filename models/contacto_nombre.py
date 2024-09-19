@@ -26,9 +26,9 @@ class Contactoname(models.Model):
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
-    @api.onchange('name')
-    def _onchange_name(self):  #funcion para que al registrar las letras sean mayusculas
-        if self.name:
-            self.name = self.name.upper()
-
+    @api.onchange('partner_id')
+    def _onchange_partner_id(self):
+        # Verifica si el nombre del partner_id está en lowercase y cámbialo
+        if self.partner_id and isinstance(self.partner_id.name, str):
+            self.partner_id.name = self.partner_id.name.upper()
 
