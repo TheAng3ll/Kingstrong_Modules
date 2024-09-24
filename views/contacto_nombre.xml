@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="crm_lead_form_view_custom" model="ir.ui.view">
+			<field name="name">crm.lead.form.view.custom</field>
+			<field name="model">crm.lead</field>
+			<field name="inherit_id" ref="crm.crm_lead_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='tag_ids']" position="after">
+					<field name="custom_dropdown_id" class="oe_inline" string="Seguimiento"/>
+				</xpath>
+			</field>
+	    	</record>
+	</data>
+</odoo>
