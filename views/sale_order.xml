@@ -27,6 +27,12 @@
 	    		<field name="note" position="attributes">
                     		<attribute name="readonly">1</attribute>
 			</field>
+			
+			<xpath expr="//field[@name='branch_id']" position="attributes">
+                                <attribute name="readonly">1</attribute>
+                                <attribute name="options">{'no_open': True}</attribute>
+                        </xpath>
+
         	</field>
 	</record>
         <record model="ir.ui.view" id="sale_margin_sale_order_line_form">
